@@ -46,7 +46,7 @@ const commandHandlers = {
         if (!user) {
             return bot.sendMessage(
                 chatId, 
-                "⚠️ Please register first by using the /register command before playing."
+                "⚠️ Please register first /register to start playing."
             );
         }
 
