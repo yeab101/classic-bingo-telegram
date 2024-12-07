@@ -30,7 +30,7 @@ const commandHandlers = {
           [{ text: "Play 🎮", callback_data: "play" }, { text: "Register 👤", callback_data: "register" }],
           [{ text: "Balance 💰", callback_data: "balance" }, { text: "CBE to CBE Deposit 💸", callback_data: "deposit" }],
           [{ text: "Withdraw 💁‍♂️", callback_data: "withdraw" }, { text: "Transfer Balance 💳", callback_data: "transfer" }],
-          [{ text: "Instructions ℹ️", callback_data: "instructions" }, { text: "History 📜", callback_data: "history" }],
+          [{ text: "Instructions ℹ️", web_app: { url: `${baseUrl}/how-to-play` } }, { text: "History 📜", callback_data: "history" }],
           [{ text: "Join Group 👥", url: "https://t.me/classicbingo_bot_group" }]
         ]
       }
