@@ -39,15 +39,42 @@ const commandHandlers = {
 
   // Game related handlers
   play: async (chatId) => {
-    await bot.sendMessage(chatId, "🎮 Best of luck on your gaming adventure!", {
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: "🎮 Play 10", web_app: { url: `${baseUrl}/board/10/${chatId}` } }, { text: "🎮 Play 20", web_app: { url: `${baseUrl}/board/20/${chatId}` } }],
-          [{ text: "🎮 Play 50", web_app: { url: `${baseUrl}/board/50/${chatId}` } }, { text: "🎮 Play 100", web_app: { url: `${baseUrl}/board/100/${chatId}` } }],
-          [{ text: "🎮 Play Demo", web_app: { url: `${baseUrl}/board/0/${chatId}` } }]
-        ]
-      }
-    });
+    try {
+        // Check if user exists in database
+        const user = await User.findOne({ chatId });
+        
+        if (!user) {
+            return bot.sendMessage(
+                chatId, 
+                "⚠️ Please register first by using the /register command before playing."
+            );
+        }
+
+        // If user exists, proceed with sending game options
+        await bot.sendMessage(chatId, "🎮 Best of luck on your gaming adventure!", {
+            reply_markup: {
+                inline_keyboard: [
+                    [
+                        { text: "🎮 Play 10", web_app: { url: `${baseUrl}/board/10/${chatId}` } }, 
+                        { text: "🎮 Play 20", web_app: { url: `${baseUrl}/board/20/${chatId}` } }
+                    ],
+                    [
+                        { text: "🎮 Play 50", web_app: { url: `${baseUrl}/board/50/${chatId}` } }, 
+                        { text: "🎮 Play 100", web_app: { url: `${baseUrl}/board/100/${chatId}` } }
+                    ],
+                    [
+                        { text: "🎮 Play Demo", web_app: { url: `${baseUrl}/board/0/${chatId}` } }
+                    ]
+                ]
+            }
+        });
+    } catch (error) {
+        console.error('Error in play handler:', error);
+        await bot.sendMessage(
+            chatId, 
+            "❌ Sorry, something went wrong. Please try again later."
+        );
+    }
   },
 
   // User account handlers
