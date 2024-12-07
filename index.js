@@ -23,9 +23,7 @@ const server = http.createServer(app);
 // Initialize Server
 const startServer = async () => {
   try {
-    await connectToDatabase(mongoUrl);
-    
-    // Start the server first to ensure socket.io is ready
+    await connectToDatabase(mongoUrl); 
     server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`); 
       console.log('Telegram bot is running...');
