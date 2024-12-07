@@ -70,10 +70,10 @@ const transactionHandlers = {
             const amount = await getValidInput(
                 bot,
                 chatId,
-                "Enter amount to withdraw (10 ETB - 1000 ETB):",
+                "Enter amount to withdraw (25 ETB - 1000 ETB):",
                 (text) => {
                     const num = parseFloat(text);
-                    return !isNaN(num) && num >= 10 && num <= 1000;
+                    return !isNaN(num) && num >= 25 && num <= 1000;
                 }
             );
 
